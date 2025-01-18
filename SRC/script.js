@@ -40,3 +40,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));

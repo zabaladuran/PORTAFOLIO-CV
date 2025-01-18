@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Configuración de Particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                line_linked: { enable: true, color: "#ffffff" },
+                move: { enable: true, speed: 2 }
+            }
+        });
+    </script>
     <header class="profile-container">
         <img src="foto-inconito.jpg" alt="Profile Picture" class="profile-image">
         <h1 class="profile-name">Angel Manuel Quintero Duran</h1>

@@ -1,3 +1,12 @@
+#particles-js {
+    position: fixed; /* Para que siempre esté en el fondo */
+    width: 100%; /* Ocupar todo el ancho */
+    height: 100%; /* Ocupar toda la altura */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Enviar al fondo */
+}
+
 /* Reset and base styles */
 * {
     margin: 0;
