@@ -1,135 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Quintero</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .logo {
+            font-size: 92px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: 'Product Sans', Arial, sans-serif;
+        }
+        .logo span {
+            display: inline-block;
+        }
+        .q { color: #4285F4; }
+        .u { color: #EA4335; }
+        .i { color: #FBBC05; }
+        .n { color: #4285F4; }
+        .t { color: #34A853; }
+        .e { color: #EA4335; }
+        .r { color: #FBBC05; }
+        .o { color: #34A853; }
+        .search-container {
+            width: 100%;
+            max-width: 584px;
+            position: relative;
+        }
+        .search-box {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 24px;
+            border: 1px solid #dfe1e5;
+            outline: none;
+            text-align: left;
+            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #f8f9fa;
+            border: 1px solid #f8f9fa;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            border: 1px solid #dadce0;
+        }
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: #f2f2f2;
+            font-size: 14px;
+        }
+        
+        .search-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 24px;
+            background-color: #4285F4;
+            color: white;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #357ae8;
+        }
+    </style>
+    <script>
+        function redirectToSearch(event) {
+            if (event.type === 'keypress' && event.key !== 'Enter') return;
+            let query = document.querySelector('.search-box').value;
+            if (query.trim() !== "") {
+                window.location.href = `busqueda.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+    </script>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Configuración de Particles.js
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80 },
-                color: { value: "#ffffff" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5 },
-                size: { value: 3 },
-                line_linked: { enable: true, color: "#ffffff" },
-                move: { enable: true, speed: 2 }
-            }
-        });
-    </script>
-    <header class="profile-container">
-        <img src="foto-inconito.jpg" alt="Profile Picture" class="profile-image">
-        <h1 class="profile-name">Angel Manuel Quintero Duran</h1>
-        <p class="profile-title">JUNIOR</p>
-        <div class="social-icons">
-            <a href="https://github.com/zabaladuran" target="_blank"><i class="fab fa-github"> zabaladuran</i></a>
-            <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank"><i class="fab fa-linkedin"> Angel Manuel Quintero Duran</i></a>
-            <a href=""><i class="fas fa-envelope"> zabaladuran321@gmail.com</i></a>
-        </div>
-    </header>
-
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <p class="animate-on-scroll">
-            Programador Junior con conocimientos en desarrollo web y bases de datos, utilizando tecnologías como HTML, CSS, JavaScript, PHP y MySQL. Proactivo, con capacidad de aprendizaje rápido y motivado por desarrollar soluciones prácticas que optimicen procesos. Interesado en adquirir experiencia y contribuir al éxito de proyectos tecnológicos mientras sigo creciendo profesionalmente.<br> <br>
-            Junior programmer with knowledge in web development and databases, using technologies such as HTML, CSS, JavaScript, PHP and MySQL. Proactive, with the ability to learn quickly and motivated to develop practical solutions that optimize processes. Interested in gaining experience and contributing to the success of technological projects while continuing to grow professionally.
-
-
-
-        </p>
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-container">
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">JavaScript</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 10%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">Python</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 30%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">Html</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 70%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">css</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 70%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">Node.js</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 5%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">React</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 5%"></div>
-                </div>
-            </div>
-            <div class="skill-card animate-on-scroll">
-                <h3 class="skill-name">SQL</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 40%"></div>
-                </div>
-            </div>
-            <!-- Add more skill cards as needed -->
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-container">
-            <div class="project-card animate-on-scroll">
-                <img src="IMC.jpg" alt="Project 1">
-                <div class="project-info">
-                    <h3>Calculadora IMC para estudiantes de la universidad UDI</h3>
-                    <p>Calculadora IMC basica para estudiantes de la UDI-"Universidad de Investigación y Desarrollo"- colombia <a href="https://github.com/nicoackerman/calculadora-basica-imc" target="_blank">Colaboradores en github</a></p>
-                    <a href="https://calculadora-basica-imc.vercel.app/" target="_blank" class="project-link">View Project</a>
-                </div>
-            </div>
-
-
-            <div class="project-card animate-on-scroll">
-                <img src="project1.jpg" alt="Project 1">
-                <div class="project-info">
-                    <h3>Project Title</h3>
-                    <p>Project description goes here</p>
-                    <a href="" class="project-link">View Project</a>
-                </div>
-            </div>
-            <!-- Add more project cards as needed -->
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2 class="section-title">Contact</h2>
-        <form class="contact-form animate-on-scroll">
-            <input type="text" class="form-input" placeholder="Your Name" required>
-            <input type="email" class="form-input" placeholder="Your Email" required>
-            <textarea class="form-input" placeholder="Your Message" required></textarea>
-            <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-    </section>
-
-    <script src="script.js"></script>
+    <div class="logo">
+        <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Escribe cualquier cosa 👉👈😳" onkeypress="redirectToSearch(event)">
+        <button class="search-button" onclick="redirectToSearch(event)">Buscar</button>
+    </div>
+    <div class="social-icons">
+        <a href="https://github.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+            GitHub
+        </a>
+        <a href="https://linkedin.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+            LinkedIn
+        </a>
+        <a href="https://mail.google.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
+            Gmail
+        </a>
+        <a href="https://wa.me" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
+            WhatsApp
+        </a>
+    </div>
 </body>
 </html>

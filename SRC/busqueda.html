@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de búsqueda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .q { color: #4285F4; }
+        .u { color: #EA4335; }
+        .i { color: #FBBC05; }
+        .n { color: #4285F4; }
+        .t { color: #34A853; }
+        .e { color: #EA4335; }
+        .r { color: #FBBC05; }
+        .o { color: #34A853; }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Product Sans', Arial, sans-serif;
+            color: #4285F4;
+            margin-right: 20px;
+        }
+        .search-container {
+            flex-grow: 1;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 24px;
+            border: 1px solid #dfe1e5;
+            outline: none;
+            text-align: left;
+            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+        }
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .results {
+            width: 60%;
+            text-align:initial;
+            font-family: 'Product Sans', Arial, sans-serif;
+        }
+        .sidebar {
+            width: 30%;
+            text-align: center;
+        }
+        .sidebar img {
+            position: center;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 50px;
+        }
+        .social-icons {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .p
+        {
+            text-align:initial;
+            font-family: 'Product Sans', Arial, sans-serif;
+        }
+    </style>
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || "";
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchQuery").innerText = getQueryParam("q");
+        });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"> <a href="/index.html"> <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span> </a></div>
+        <div class="search-container">
+            <input type="text" class="search-box" value="" placeholder="Buscar...">
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="results">
+            <p>Resultados para: <strong id="query-text"></strong></p> <br>
+
+            <a href="https://calculadora-basica-imc.vercel.app/inicio" target="_blank">Calculadora IMC para estudiantes de la universidad UDI</a>
+            <p>Calculadora IMC basica para estudiantes de la UDI-"Universidad de Investigación y Desarrollo"- colombia <a href="https://github.com/nicoackerman/calculadora-basica-imc" target="_blank">Colaboradores en github</a> <br></p>
+            <img src="/img/390484426-79542b78-2339-4285-8f6b-8f3b4d7afc6d.png" class="sidebar img" ><br><br>
+
+            <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank">Juego de autos de carreras echo c# por consola </a>
+            <p>Es un juego de coches de carreras de hasta maximo 5 players donde puedes elegir tu veiculo y hacer carreras con tus amigos en  diferentes pistas y cuenta con potencidaores aleatorios en las carreras <br></p>
+            <img src="/img/img 2.jpg" class="sidebar img" ><br><br>
+        </div>
+        
+        <div class="sidebar">
+            <img src="/img/Imagen de WhatsApp 2025-03-31 a las 23.39.30_af4ffe58.jpg"  alt="Imagen">
+            <h2>About me</h2>
+            <p class="p">Programdor con experiencia en frontend y backend con grandes capasidades de aprendisaje y
+                 conocimientos intuitivos en logica computacional y logica algoritmica  <br> <br> <br> </p>
+            <div class="social-icons">
+                <a href="https://github.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                    GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+                    LinkedIn
+                </a>
+                <a href="https://mail.google.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
+                    Gmail
+                </a>
+                <a href="https://wa.me" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
