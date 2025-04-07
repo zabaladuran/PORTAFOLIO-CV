@@ -1,146 +1,177 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quintero</title>
-    <style>
-        body {
-            background-color: #ffffff;
-            color: black;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .logo {
-            font-size: 92px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-family: 'Product Sans', Arial, sans-serif;
-        }
-        .logo span {
-            display: inline-block;
-        }
-        .q { color: #4285F4; }
-        .u { color: #EA4335; }
-        .i { color: #FBBC05; }
-        .n { color: #4285F4; }
-        .t { color: #34A853; }
-        .e { color: #EA4335; }
-        .r { color: #FBBC05; }
-        .o { color: #34A853; }
-        .search-container {
-            width: 100%;
-            max-width: 584px;
-            position: relative;
-        }
-        .search-box {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            border-radius: 24px;
-            border: 1px solid #dfe1e5;
-            outline: none;
-            text-align: left;
-            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-        }
-        .buttons {
-            margin-top: 20px;
-        }
-        .btn {
-            background-color: #f8f9fa;
-            border: 1px solid #f8f9fa;
-            padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 4px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            border: 1px solid #dadce0;
-        }
-        .social-icons {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-        }
-        .social-icons a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: black;
-            font-size: 14px;
-        }
-        .social-icons img {
-            width: 40px;
-            height: 40px;
-        }
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            background: #f2f2f2;
-            font-size: 14px;
-        }
-        
-        .search-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 24px;
-            background-color: #4285F4;
-            color: white;
-            cursor: pointer;
-        }
-        .search-button:hover {
-            background-color: #357ae8;
-        }
-    </style>
-    <script>
-        function redirectToSearch(event) {
-            if (event.type === 'keypress' && event.key !== 'Enter') return;
-            let query = document.querySelector('.search-box').value;
-            if (query.trim() !== "") {
-                window.location.href = `busqueda.html?q=${encodeURIComponent(query)}`;
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quintero Cósmico</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://media.tenor.com/2roX3uxz_68AAAAC/night-stars.gif') repeat;
+      background-size: cover;
+      z-index: 0;
+      opacity: 0.3;
+      animation: twinkle 20s linear infinite;
+    }
+
+    @keyframes twinkle {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
+
+    .logo {
+      font-size: 92px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Product Sans', Arial, sans-serif;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+    }
+
+    .logo span {
+      display: inline-block;
+    }
+
+    .q { color: #4285F4; }
+    .u { color: #EA4335; }
+    .i { color: #FBBC05; }
+    .n { color: #4285F4; }
+    .t { color: #34A853; }
+    .e { color: #EA4335; }
+    .r { color: #FBBC05; }
+    .o { color: #34A853; }
+
+    .search-container {
+      width: 100%;
+      max-width: 584px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 24px;
+      border: none;
+      outline: none;
+      text-align: left;
+      box-shadow: 0 1px 10px rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      backdrop-filter: blur(6px);
+    }
+
+    .search-box::placeholder {
+      color: #ddd;
+    }
+
+    .search-button {
+      margin-top: 15px;
+      padding: 10px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 24px;
+      background-color: #00bcd4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00bcd4;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .search-button:hover {
+      background-color: #0097a7;
+      box-shadow: 0 0 20px #00bcd4, 0 0 30px #00bcd4;
+    }
+
+    .social-icons {
+      margin-top: 25px;
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-icons a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.1);
+    }
+
+    .social-icons img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+      filter: drop-shadow(0 0 5px #fff);
+    }
+  </style>
+  <script>
+    function redirectToSearch(event) {
+      if (event.type === 'keypress' && event.key !== 'Enter') return;
+      let query = document.querySelector('.search-box').value;
+      if (query.trim() !== "") {
+        window.location.href = `busqueda.html?q=${encodeURIComponent(query)}`;
+      }
+    }
+  </script>
 </head>
 <body>
-    <div class="logo">
-        <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
-    </div>
-    <div class="search-container">
-        <input type="text" class="search-box" placeholder="Escribe cualquier cosa 👉👈😳" onkeypress="redirectToSearch(event)">
-        <button class="search-button" onclick="redirectToSearch(event)">Buscar</button>
-    </div>
-    <div class="social-icons">
-        <a href="https://github.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-            GitHub
-        </a>
-        <a href="https://linkedin.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-            LinkedIn
-        </a>
-        <a href="https://mail.google.com" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
-            Gmail
-        </a>
-        <a href="https://wa.me" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
-            WhatsApp
-        </a>
-    </div>
+  <div class="stars"></div>
+
+  <div class="logo">
+    <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
+  </div>
+
+  <div class="search-container">
+    <input type="text" class="search-box" placeholder="Escribe cualquier cosa 👉👈😳" onkeypress="redirectToSearch(event)">
+    <button class="search-button" onclick="redirectToSearch(event)">Buscar</button>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://github.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+      GitHub
+    </a>
+    <a href="https://linkedin.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+      LinkedIn
+    </a>
+    <a href="https://mail.google.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
+      Gmail
+    </a>
+    <a href="https://wa.me" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
+      WhatsApp
+    </a>
+  </div>
 </body>
 </html>

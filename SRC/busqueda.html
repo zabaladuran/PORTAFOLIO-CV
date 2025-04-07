@@ -1,150 +1,238 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de búsqueda</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: black;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-        }
-        .q { color: #4285F4; }
-        .u { color: #EA4335; }
-        .i { color: #FBBC05; }
-        .n { color: #4285F4; }
-        .t { color: #34A853; }
-        .e { color: #EA4335; }
-        .r { color: #FBBC05; }
-        .o { color: #34A853; }
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            font-family: 'Product Sans', Arial, sans-serif;
-            color: #4285F4;
-            margin-right: 20px;
-        }
-        .search-container {
-            flex-grow: 1;
-        }
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 24px;
-            border: 1px solid #dfe1e5;
-            outline: none;
-            text-align: left;
-            box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-        }
-        .main-container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-        .results {
-            width: 60%;
-            text-align:initial;
-            font-family: 'Product Sans', Arial, sans-serif;
-        }
-        .sidebar {
-            width: 30%;
-            text-align: center;
-        }
-        .sidebar img {
-            position: center;
-            width: 100%;
-            max-width: 300px;
-            border-radius: 50px;
-        }
-        .social-icons {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: black;
-            font-size: 14px;
-        }
-        .social-icons img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-        }
-        .p
-        {
-            text-align:initial;
-            font-family: 'Product Sans', Arial, sans-serif;
-        }
-    </style>
-    <script>
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name) || "";
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("searchQuery").innerText = getQueryParam("q");
-        });
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultados de Búsqueda - Quintero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --primary-color: #7f8fff;
+      --secondary-color: #fdd835;
+      --bg-color: #0b0c2a;
+      --text-color: #f0f0f0;
+      --card-bg: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #0b0c2a, #1c1c4c);
+      background-attachment: fixed;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/vXqRmjW/stars-bg.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0.2;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(12, 12, 35, 0.8);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .logo span {
+      font-family: 'Product Sans', sans-serif;
+    }
+
+    .q { color: #7f8fff; }
+    .u { color: #ff6f91; }
+    .i { color: #fdd835; }
+    .n { color: #7f8fff; }
+    .t { color: #4ee4c1; }
+    .e { color: #ff6f91; }
+    .r { color: #fdd835; }
+    .o { color: #4ee4c1; }
+
+    .search-box {
+      margin-left: auto;
+      padding: 10px 20px;
+      width: 50%;
+      border: 1px solid #555;
+      border-radius: 24px;
+      font-size: 16px;
+      outline: none;
+      background-color: #1e1e3f;
+      color: white;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .results {
+      flex: 2;
+    }
+
+    .result-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .result-card:hover {
+      transform: scale(1.02);
+    }
+
+    .result-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .sidebar {
+      flex: 1;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .sidebar img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 100px;
+      margin-bottom: 15px;
+      border: 2px solid var(--secondary-color);
+    }
+
+    .sidebar h2 {
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--secondary-color);
+    }
+
+    .sidebar p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .social-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-color);
+    }
+
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      filter: brightness(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .search-box {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+</style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo"> <a href="/index.html"> <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span> </a></div>
-        <div class="search-container">
-            <input type="text" class="search-box" value="" placeholder="Buscar...">
-        </div>
+  <div class="header">
+    <div class="logo">
+      <a href="../SRC/index.html">
+        <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
+      </a>
     </div>
-    <div class="main-container">
-        <div class="results">
-            <p>Resultados para: <strong id="query-text"></strong></p> <br>
+    <input type="text" class="search-box" placeholder="Buscar...">
+  </div>
 
-            <a href="https://calculadora-basica-imc.vercel.app/inicio" target="_blank">Calculadora IMC para estudiantes de la universidad UDI</a>
-            <p>Calculadora IMC basica para estudiantes de la UDI-"Universidad de Investigación y Desarrollo"- colombia <a href="https://github.com/nicoackerman/calculadora-basica-imc" target="_blank">Colaboradores en github</a> <br></p>
-            <img src="img/390484426-79542b78-2339-4285-8f6b-8f3b4d7afc6d.png" class="sidebar img" ><br><br>
+  <div class="main-container">
+    <div class="results">
+      <p><strong>Resultados de búsqueda:</strong></p>
 
-            <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank">Juego de autos de carreras echo c# por consola </a>
-            <p>Es un juego de coches de carreras de hasta maximo 5 players donde puedes elegir tu veiculo y hacer carreras con tus amigos en  diferentes pistas y cuenta con potencidaores aleatorios en las carreras <br></p>
-            <img src="img/img 2.jpg" class="sidebar img" ><br><br>
-        </div>
-        
-        <div class="sidebar">
-            <img src="img/Imagen de WhatsApp 2025-03-31 a las 23.39.30_af4ffe58.jpg"  alt="Imagen">
-            <h2>About me</h2>
-            <p class="p">Programdor con experiencia en frontend y backend con grandes capasidades de aprendisaje y
-                 conocimientos intuitivos en logica computacional y logica algoritmica  <br> <br>  </p>
-            <p>COlOMBIA - 19 años - EL mas camellador <br> <br> </p>
-            <div class="social-icons">
-                <a href="https://github.com/zabaladuran" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-                    LinkedIn
-                </a>
-                <a href="https://mail.google.com" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
-                    zabaladuran123@gmail.com
-                </a>
-                <a href="https://wa.me/qr/FZ7KKCRDPKTJC1" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
-                    WhatsApp
-                </a>
-            </div>
-        </div>
+      <div class="result-card">
+        <a href="https://calculadora-basica-imc.vercel.app/inicio" target="_blank">
+          <h3>Calculadora IMC para estudiantes UDI</h3>
+        </a>
+        <p>Calculadora de Índice de Masa Corporal diseñada para estudiantes de la Universidad UDI en Colombia. Incluye estadísticas y gráfica.</p>
+        <a href="https://github.com/nicoackerman/calculadora-basica-imc" target="_blank">Ver en GitHub</a>
+        <img src="img/390484426-79542b78-2339-4285-8f6b-8f3b4d7afc6d.png" alt="Calculadora IMC">
+      </div>
+
+      <div class="result-card">
+        <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank">
+          <h3>Juego de Autos en Consola (C#)</h3>
+        </a>
+        <p>Juego de carreras para consola hecho en C# que permite competir hasta con 5 jugadores, eligiendo vehículos y pistas con potenciadores aleatorios.</p>
+        <img src="img/img 2.jpg" alt="Juego de carreras">
+      </div>
     </div>
+
+    <div class="sidebar">
+      <img src="img/Imagen de WhatsApp 2025-03-31 a las 23.39.30_af4ffe58.jpg" alt="Foto de perfil">
+      <h2>Sobre mí</h2>
+      <p>Programador con experiencia en frontend y backend, con gran capacidad de aprendizaje y lógica computacional. Me gusta construir cosas que funcionen bien y se vean mejor.</p>
+      <p><strong>Colombia</strong> - 19 años - Siempre camellando 💪</p>
+
+      <div class="social-icons">
+        <a href="https://github.com/zabaladuran" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn
+        </a>
+        <a href="mailto:zabaladuran123@gmail.com">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email"> zabaladuran123@gmail.com
+        </a>
+        <a href="https://wa.me/qr/FZ7KKCRDPKTJC1" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp"> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
