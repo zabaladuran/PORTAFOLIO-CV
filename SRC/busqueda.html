@@ -167,6 +167,72 @@
       filter: brightness(1.2);
     }
 
+    .about-me {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .about-me h2 {
+      color: var(--secondary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      margin: 10px 0;
+    }
+
+    .interactive-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .like-button, .submit-comment {
+      background-color: var(--secondary-color);
+      color: var(--bg-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      cursor: pointer;
+      margin: 10px 0;
+      transition: background 0.3s ease;
+    }
+
+    .like-button:hover, .submit-comment:hover {
+      background-color: #e6c200;
+    }
+
+    .comment-box {
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #555;
+      margin-bottom: 10px;
+      background-color: #1e1e3f;
+      color: white;
+    }
+
+    .comments-section {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .comments-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .comments-section li {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 768px) {
       .main-container {
         flex-direction: column;
@@ -210,14 +276,43 @@
         <p>Juego de carreras para consola hecho en C# que permite competir hasta con 5 jugadores, eligiendo vehículos y pistas con potenciadores aleatorios.</p>
         <img src="img/img 2.jpg" alt="Juego de carreras">
       </div>
+      <div class="comments-section">
+        <h3>Comentarios:</h3>
+        <ul id="comments-list"></ul>
+      </div>
     </div>
 
     <div class="sidebar">
       <img src="img/Imagen de WhatsApp 2025-03-31 a las 23.39.30_af4ffe58.jpg" alt="Foto de perfil">
       <h2>Sobre mí</h2>
       <p>Programador con experiencia en frontend y backend, con gran capacidad de aprendizaje y lógica computacional. Me gusta construir cosas que funcionen bien y se vean mejor.</p>
-      <p><strong>Colombia</strong> - 19 años - Siempre camellando 💪</p>
-
+      <div class="about-me">
+        <h2>Mas datos sobre mi</h2>
+        <div class="about-content">
+          <p><strong>Nombre:</strong> Angel Manuel Quintero Durán</p>
+          <p><strong>Edad:</strong> 19 años</p>
+          <p><strong>Intereses:</strong> Programación, videojuegos, música, y aprender cosas nuevas.</p>
+          <p><strong>Pasatiempos:</strong> Jugar videojuegos, leer sobre tecnología, y explorar nuevas herramientas de desarrollo.</p>
+          <p><strong>Comida favorita:</strong> Pizza 🍕</p>
+          <p><strong>Color favorito:</strong> Azul oscuro 🌌</p>
+          <p><strong>Datos curiosos:</strong> 
+            <ul>
+              <li>¡Puedo escribir código mientras escucho música a todo volumen! 🎧</li>
+              <li>Mi primer programa fue un juego de consola en C#.</li>
+              <li>Me encanta resolver acertijos y problemas lógicos.</li>
+            </ul>
+          </p>
+          <p><strong>Mi cita favorita:</strong> "El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+          <p><strong>Lema de vida:</strong> "Nunca dejes de aprender, porque la vida nunca deja de enseñar."</p>
+        </div>
+    
+        <div class="interactive-section">
+          <button class="like-button">👍 Me gusta</button>
+          <p id="like-count">0 Me gusta</p>
+          <textarea class="comment-box" placeholder="Deja un comentario..."></textarea>
+          <button class="submit-comment">Enviar comentario</button>
+        </div>
+      </div>
       <div class="social-icons">
         <a href="https://github.com/zabaladuran" target="_blank">
           <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
@@ -234,5 +329,29 @@
       </div>
     </div>
   </div>
+
+
+
+  <script>
+    // Botón de "Me gusta"
+    let likeCount = 0;
+    document.querySelector('.like-button').addEventListener('click', () => {
+      likeCount++;
+      document.getElementById('like-count').textContent = `${likeCount} Me gusta`;
+    });
+
+    // Área de comentarios
+    document.querySelector('.submit-comment').addEventListener('click', () => {
+      const commentBox = document.querySelector('.comment-box');
+      const comment = commentBox.value.trim();
+      if (comment) {
+        const commentList = document.getElementById('comments-list');
+        const newComment = document.createElement('li');
+        newComment.textContent = comment;
+        commentList.appendChild(newComment);
+        commentBox.value = '';
+      }
+    });
+  </script>
 </body>
 </html>
