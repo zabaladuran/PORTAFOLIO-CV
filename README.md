@@ -12,7 +12,6 @@
 📌 **GitHub:** [zabaladuran](https://github.com/zabaladuran)  
 📌 **LinkedIn:** [Angel Manuel Quintero Durán](https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/)  
 📌 **Correo Electrónico:** [zabaladuran123@gmail.com](mailto:zabaladuran123@gmail.com)  
-📌 **WhatsApp:** [Enviar mensaje](https://wa.me/qr/FZ7KKCRDPKTJC1)  
 
 ---
 
