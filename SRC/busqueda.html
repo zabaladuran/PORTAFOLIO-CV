@@ -1,357 +1,445 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Resultados de Búsqueda - Quintero</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-<style>
-    :root {
-      --primary-color: #7f8fff;
-      --secondary-color: #fdd835;
-      --bg-color: #0b0c2a;
-      --text-color: #f0f0f0;
-      --card-bg: rgba(255, 255, 255, 0.1);
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Mí - Espacial</title>
 
+  <!-- Fuentes y Librerías -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <!-- Estilos -->
+  <style>
     body {
       margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to bottom, #0b0c2a, #1c1c4c);
-      background-attachment: fixed;
-      color: var(--text-color);
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0d1a26 0%, #000000 100%);
       overflow-x: hidden;
+      color: #fff;
     }
 
-    body::before {
-      content: "";
+    header {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 4em;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: 5px;
+      color: #00ffff;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+      }
+    }
+
+    .stars, .meteors {
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('https://giffiles.alphacoders.com/221/221794.gif');
-      background-size: cover;
-      background-repeat: no-repeat;
-      opacity: 0.5;
-      z-index: -1;
+      z-index: 0;
+      top: 0;
+      left: 0;
       pointer-events: none;
     }
 
-    a {
-      color: var(--secondary-color);
-      text-decoration: none;
+    .stars::before {
+      content: '';
+      background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/img/stars.png') repeat top center;
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.4;
     }
 
-    a:hover {
-      text-decoration: underline;
+    @keyframes moveStars {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
     }
 
-    .header {
-      display: flex;
-      align-items: center;
-      padding: 20px;
-      background-color: rgba(12, 12, 35, 0.8);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(to bottom, white, transparent);
+      animation: meteor-fall linear infinite;
+      opacity: 0.5;
     }
 
-    .logo a {
-      font-size: 28px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .logo span {
-      font-family: 'Product Sans', sans-serif;
-    }
-
-    .q { color: #7f8fff; }
-    .u { color: #ff6f91; }
-    .i { color: #fdd835; }
-    .n { color: #7f8fff; }
-    .t { color: #4ee4c1; }
-    .e { color: #ff6f91; }
-    .r { color: #fdd835; }
-    .o { color: #4ee4c1; }
-
-    .search-box {
-      margin-left: auto;
-      padding: 10px 20px;
-      width: 50%;
-      border: 1px solid #555;
-      border-radius: 24px;
-      font-size: 16px;
-      outline: none;
-      background-color: #1e1e3f;
-      color: white;
-    }
-
-    .main-container {
-      display: flex;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .results {
-      flex: 2;
-    }
-
-    .result-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .result-card:hover {
-      transform: scale(1.02);
-    }
-
-    .result-card img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    .sidebar {
-      flex: 1;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
-    }
-
-    .sidebar img {
-      width: 100%;
-      max-width: 200px;
-      border-radius: 100px;
-      margin-bottom: 15px;
-      border: 2px solid var(--secondary-color);
-    }
-
-    .sidebar h2 {
-      margin-bottom: 10px;
-      font-weight: 700;
-      color: var(--secondary-color);
-    }
-
-    .sidebar p {
-      font-size: 14px;
-      margin-bottom: 20px;
-      color: #ccc;
-    }
-
-    .social-icons {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .social-icons a {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      color: var(--text-color);
-    }
-
-    .social-icons img {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-      filter: brightness(1.2);
+    @keyframes meteor-fall {
+      0% {
+        transform: translateY(-100px) translateX(0) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(200px) rotate(45deg);
+        opacity: 0;
+      }
     }
 
     .about-me {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
+      position: relative;
+      z-index: 2;
+      padding: 4rem 2rem;
+      color: #fff;
+      text-align: center;
     }
 
     .about-me h2 {
-      color: var(--secondary-color);
+      font-size: 3rem;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      margin-bottom: 2rem;
+    }
+
+    .about-me-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .about-card {
+      background: rgba(0, 0, 50, 0.5);
+      border: 2px solid #00ffff;
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      min-width: 250px;
+      box-shadow: 0 0 15px #00ffff88;
+      transition: transform 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: scale(1.05);
+    }
+
+    .about-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #ff00cc;
+    }
+
+    .about-card p {
+      font-size: 1.2rem;
+      color: #ffffffcc;
+    }
+
+    /* Proyectos */
+    .projects {
+      padding: 4rem 2rem;
+      background: #111;
       text-align: center;
-      margin-bottom: 20px;
     }
 
-    .about-content p {
-      margin: 10px 0;
+    .projects h2 {
+      font-size: 2.5em;
+      color: #00bcd4;
+      margin-bottom: 2rem;
     }
 
-    .interactive-section {
-      margin-top: 20px;
-      text-align: center;
+    .project-card {
+      background: #222;
+      border: 1px solid #00bcd4;
+      border-radius: 10px;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      max-width: 700px;
+      transition: transform 0.3s ease;
     }
 
-    .like-button, .submit-comment {
-      background-color: var(--secondary-color);
-      color: var(--bg-color);
-      border: none;
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card h3 {
+      color: #ff9800;
+      font-size: 1.8em;
+    }
+
+    .project-card p {
+      color: #ccc;
+      font-size: 1.1em;
+      margin: 0.5rem 0;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
       padding: 10px 20px;
-      border-radius: 24px;
-      cursor: pointer;
-      margin: 10px 0;
+      background: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
       transition: background 0.3s ease;
     }
 
-    .like-button:hover, .submit-comment:hover {
-      background-color: #e6c200;
+    .project-link:hover {
+      background: #0097a7;
     }
 
-    .comment-box {
-      width: 100%;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid #555;
-      margin-bottom: 10px;
-      background-color: #1e1e3f;
+    footer {
+      background: #263238;
       color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 4rem;
     }
+    .contact {
+  padding: 2rem;
+  text-align: center;
+}
 
-    .comments-section {
-      margin-top: 20px;
-      text-align: left;
-    }
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
 
-    .comments-section ul {
-      list-style: none;
-      padding: 0;
-    }
+.contact-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
 
-    .comments-section li {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
+.contact-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.contact-links img {
+  width: 24px;
+  height: 24px;
+}
 
     @media (max-width: 768px) {
-      .main-container {
+      .about-me-info {
         flex-direction: column;
+        align-items: center;
       }
-
-      .search-box {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 10px;
+      .about-card {
+        width: 90%;
       }
     }
-</style>
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5em;
+      }
+      .about-me h2, .projects h2 {
+        font-size: 2em;
+      }
+    }
+    @media (max-width: 320px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .about-me h2, .projects h2 {
+        font-size: 1.8em;
+      }
+    }
+    .contact-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px #00000080;
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background: #6366f1;
+      transform: scale(1.05);
+    }
+
+    .contact-button:focus {
+      outline: none;
+    }
+    .contact-button:active {
+      transform: scale(0.95);
+    }
+    .fun-facts {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px #00000030;
+    color: white;
+    }
+
+    .fun-facts h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #90cdf4;
+    }
+
+    .fun-facts ul {
+    list-style-type: "✨ ";
+    padding-left: 1.5rem;
+    }
+
+    .fun-facts li {
+    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
+    }
+    .fun-facts li strong {
+      color: #ffcc00;
+    }
+    .fun-facts li em {
+      color: #ff00cc;
+    }
+  </style>
 </head>
 <body>
-  <div class="header">
-    <div class="logo">
-      <a href="index.html">
-        <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
+
+  <!-- Fondo animado -->
+  <div class="stars"></div>
+  <div class="meteors" id="meteors"></div>
+
+ 
+  <header>
+    <h1>Angel Quintero</h1> <br> <br>
+    <p id="presentacion" style="font-size: 1.2rem; margin-top: 10px; color: #ccc;"></p>
+    <button onclick="scrollToContact()" class="contact-button">
+      📡 Contacto
+    </button>
+    
+  </header>
+
+  
+  <section class="about-me">
+    <h2>🌠 Datos Galácticos Sobre Mí</h2>
+    <div class="about-me-info">
+      <div class="about-card"><h3>🪐 Nombre:</h3><p>Angel Manuel Quintero Durán</p></div>
+      <div class="about-card"><h3>🌌 Edad:</h3><p>19 años</p></div>
+      <div class="about-card"><h3>👾 Intereses:</h3><p>Programación, videojuegos, música, aprender cosas nuevas.</p></div>
+      <div class="about-card"><h3>🚀 Pasatiempos:</h3><p>Jugar, leer de tecnología, explorar herramientas de desarrollo.</p></div>
+      <div class="about-card"><h3>🌮 Comida favorita:</h3><p>Pizza 🍕</p></div>
+      <div class="about-card"><h3>🎨 Color favorito:</h3><p>Azul claro</p></div>
+    </div>
+  
+    <div class="fun-facts">
+      <h3>🧠 Curiosidades Cósmicas</h3>
+      <ul>
+        <li>¡Puedo escribir código mientras escucho música a todo volumen! 🎧</li>
+        <li>Mi primer programa fue un juego de consola en C#.</li>
+        <li>Me encanta resolver acertijos y problemas lógicos.</li>
+        <li>Mi cita favorita: "El éxito es la suma de pequeños esfuerzos repetidos día tras día."</li>
+        <li><strong>Lema de vida:</strong> "Nunca dejes de aprender, porque la vida nunca deja de enseñar."</li>
+      </ul>
+    </div>
+  </section>
+  
+
+  <section class="projects">
+    <h2>🚧 Proyectos en Desarrollo</h2>
+  
+    <div class="project-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="Calculadora IMC" style="max-width: 100px; margin-bottom: 1rem;">
+      <h3>Calculadora de IMC UDI</h3>
+      <p>Calculadora web de Índice de Masa Corporal con estadísticas por programa académico.</p>
+      <a  target="_blank" href="https://calculadora-basica-imc.vercel.app/inicio" class="project-link">Ver Proyecto</a>
+        <a target="_blank"  href="https://github.com/nicoackerman/calculadora-basica-imc" class="project-link">Ver git hub del proyecto</a>
+    </div>
+  
+    <div class="project-card">
+      <img src="https://cdn-icons-png.flaticon.com/128/741/741407.png" alt="Simulación Meteoritos" style="max-width: 100px; margin-bottom: 1rem;">
+      <h3>Juego de Autos en Consola (C#)</h3>
+      <p>Juego de carreras para consola hecho en C# que permite competir hasta con 5 jugadores, eligiendo vehículos y pistas con potenciadores aleatorios.</p>
+      <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank" class="project-link">Ver git hub del proyecto</a>
+    </div>
+  </section>
+  <section class="contact">
+    <h2>📡 Contacto Interestelar</h2>
+    <div class="contact-links">
+      <a href="https://github.com/zabaladuran" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn
+      </a>
+      <a href="mailto:aquintero22@udi.edu.co">
+        <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email"> aquintero22@udi.edu.co
       </a>
     </div>
-    <input type="text" class="search-box" placeholder="Buscar...">
-  </div>
+  </section>
 
-  <div class="main-container">
-    <div class="results">
-      <p><strong>Resultados de búsqueda:</strong></p>
-
-      <div class="result-card">
-        <a href="https://calculadora-basica-imc.vercel.app/inicio" target="_blank">
-          <h3>Calculadora IMC para estudiantes UDI</h3>
-        </a>
-        <p>Calculadora de Índice de Masa Corporal diseñada para estudiantes de la Universidad UDI en Colombia. Incluye estadísticas y gráfica.</p>
-        <a href="https://github.com/nicoackerman/calculadora-basica-imc" target="_blank">Ver en GitHub</a>
-        <img src="img/390484426-79542b78-2339-4285-8f6b-8f3b4d7afc6d.png" alt="Calculadora IMC">
-      </div>
-
-      <div class="result-card">
-        <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank">
-          <h3>Juego de Autos en Consola (C#)</h3>
-        </a>
-        <p>Juego de carreras para consola hecho en C# que permite competir hasta con 5 jugadores, eligiendo vehículos y pistas con potenciadores aleatorios.</p>
-        <img src="img/img 2.jpg" alt="Juego de carreras">
-      </div>
-      <div class="comments-section">
-        <h3>Comentarios:</h3>
-        <ul id="comments-list"></ul>
-      </div>
-    </div>
-
-    <div class="sidebar">
-      <img src="img/Imagen de WhatsApp 2025-03-31 a las 23.39.30_af4ffe58.jpg" alt="Foto de perfil">
-      <h2>Sobre mí</h2>
-      <p>Programador con experiencia en frontend y backend, con gran capacidad de aprendizaje y lógica computacional. Me gusta construir cosas que funcionen bien y se vean mejor.</p>
-      <div class="about-me">
-        <h2>Mas datos sobre mi</h2>
-        <div class="about-content">
-          <p><strong>Nombre:</strong> Angel Manuel Quintero Durán</p>
-          <p><strong>Edad:</strong> 19 años</p>
-          <p><strong>Intereses:</strong> Programación, videojuegos, música, y aprender cosas nuevas.</p>
-          <p><strong>Pasatiempos:</strong> Jugar videojuegos, leer sobre tecnología, y explorar nuevas herramientas de desarrollo.</p>
-          <p><strong>Comida favorita:</strong> Pizza 🍕</p>
-          <p><strong>Color favorito:</strong> Azul oscuro 🌌</p>
-          <p><strong>Datos curiosos:</strong> 
-            <ul>
-              <li>¡Puedo escribir código mientras escucho música a todo volumen! 🎧</li>
-              <li>Mi primer programa fue un juego de consola en C#.</li>
-              <li>Me encanta resolver acertijos y problemas lógicos.</li>
-            </ul>
-          </p>
-          <p><strong>Mi cita favorita:</strong> "El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
-          <p><strong>Lema de vida:</strong> "Nunca dejes de aprender, porque la vida nunca deja de enseñar."</p>
-        </div>
-    
-        <div class="interactive-section">
-          <button class="like-button">👍 Me gusta</button>
-          <p id="like-count">0 Me gusta</p>
-          <textarea class="comment-box" placeholder="Deja un comentario..."></textarea>
-          <button class="submit-comment">Enviar comentario</button>
-        </div>
-      </div>
-      <div class="social-icons">
-        <a href="https://github.com/zabaladuran" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn
-        </a>
-        <a href="mailto:zabaladuran123@gmail.com">
-          <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email"> zabaladuran123@gmail.com
-        </a>
-        <a href="https://wa.me/qr/FZ7KKCRDPKTJC1" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp"> WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-
-
+ 
+  <footer>
+    <p>&copy; 2025 Angel Quintero 🚀 | Todos los derechos reservados.</p>
+  </footer>
 
   <script>
-    // Botón de "Me gusta"
-    let likeCount = 0;
-    document.querySelector('.like-button').addEventListener('click', () => {
-      likeCount++;
-      document.getElementById('like-count').textContent = `${likeCount} Me gusta`;
-    });
-
-    // Área de comentarios
-    document.querySelector('.submit-comment').addEventListener('click', () => {
-      const commentBox = document.querySelector('.comment-box');
-      const comment = commentBox.value.trim();
-      if (comment) {
-        const commentList = document.getElementById('comments-list');
-        const newComment = document.createElement('li');
-        newComment.textContent = comment;
-        commentList.appendChild(newComment);
-        commentBox.value = '';
+    // Meteoritos
+    const meteorContainer = document.getElementById('meteors');
+    for (let i = 0; i < 20; i++) {
+      const meteor = document.createElement('div');
+      meteor.classList.add('meteor');
+      meteor.style.left = Math.random() * window.innerWidth + 'px';
+      meteor.style.animationDuration = (3 + Math.random() * 5) + 's';
+      meteor.style.animationDelay = Math.random() * 10 + 's';
+      meteorContainer.appendChild(meteor);
+    }
+  
+    // Presentación animada
+    anime({
+      targets: '#presentacion',
+      opacity: [0, 1],
+      translateY: [20, 0],
+      delay: 500,
+      duration: 1500,
+      easing: 'easeOutExpo',
+      complete: () => {
+        document.getElementById("presentacion").innerHTML =
+          `Hola, soy <strong>Angel Manuel Quintero Durán</strong><br>
+          Programador con experiencia en <strong>frontend</strong> y <strong>backend</strong>, con gran capacidad de aprendizaje y lógica computacional. Me gusta construir cosas que funcionen bien y se vean mejor.`;
       }
     });
+  
+    // Animación de tarjetas
+    anime({
+      targets: '.about-card',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200),
+      duration: 1000,
+      easing: 'easeOutExpo'
+    });
+    function scrollToContact() {
+      document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
