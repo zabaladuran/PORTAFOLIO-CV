@@ -3,216 +3,443 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quintero Cósmico</title>
+  <title>Sobre Mí - Espacial</title>
+
+  <!-- Fuentes y Librerías -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <!-- Estilos -->
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0d1a26 0%, #000000 100%);
+      overflow-x: hidden;
       color: #fff;
-      text-align: center;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
-    .stars {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: transparent url('https://media.tenor.com/2roX3uxz_68AAAAC/night-stars.gif') repeat;
-      background-size: cover;
-      z-index: 0;
-      opacity: 0.3;
-      animation: twinkle 20s linear infinite;
-    }
-
-    @keyframes twinkle {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
-    }
-
-    .logo {
-      font-size: 92px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-family: 'Product Sans', Arial, sans-serif;
-      position: relative;
-      z-index: 1;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-
-    .logo span {
-      display: inline-block;
-    }
-
-    .q { color: #4285F4; }
-    .u { color: #EA4335; }
-    .i { color: #FBBC05; }
-    .n { color: #4285F4; }
-    .t { color: #34A853; }
-    .e { color: #EA4335; }
-    .r { color: #FBBC05; }
-    .o { color: #34A853; }
-
-    .search-container {
-      width: 100%;
-      max-width: 584px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .search-box {
-      width: 100%;
-      padding: 14px;
-      font-size: 16px;
-      border-radius: 24px;
-      border: none;
-      outline: none;
-      text-align: left;
-      box-shadow: 0 1px 10px rgba(255,255,255,0.2);
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      backdrop-filter: blur(6px);
-    }
-
-    .search-box::placeholder {
-      color: #ddd;
-    }
-
-    .search-button {
-      margin-top: 15px;
-      padding: 10px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 24px;
-      background-color: #00bcd4;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00bcd4;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .search-button:hover {
-      background-color: #0097a7;
-      box-shadow: 0 0 20px #00bcd4, 0 0 30px #00bcd4;
-    }
-
-    .social-icons {
-      margin-top: 25px;
-      display: flex;
-      gap: 20px;
-      z-index: 1;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .social-icons a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #fff;
-      font-size: 14px;
-      transition: transform 0.2s ease;
-    }
-
-    .social-icons a:hover {
-      transform: scale(1.1);
-    }
-
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
-      filter: drop-shadow(0 0 5px #fff);
-    }
-    
-  @media (max-width: 600px) {
-    body {
+    header {
       padding: 20px;
-      height: auto;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10;
     }
 
-    .logo {
-      font-size: 52px;
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 4em;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: 5px;
+      color: #00ffff;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
 
-    .search-container {
-      max-width: 100%;
-    }
-
-    .search-box {
-      font-size: 14px;
-      padding: 12px;
-    }
-
-    .search-button {
-      font-size: 14px;
-      padding: 8px 20px;
-    }
-
-    .social-icons {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .social-icons a {
-      font-size: 12px;
-      width: 60px;
-    }
-
-    .social-icons img {
-      width: 30px;
-      height: 30px;
-    }
-  }
-  </style>
-  <script>
-    function redirectToSearch(event) {
-      if (event.type === 'keypress' && event.key !== 'Enter') return;
-      let query = document.querySelector('.search-box').value;
-      if (query.trim() !== "") {
-        window.location.href = `busqueda.html?q=${encodeURIComponent(query)}`;
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
       }
     }
-  </script>
+
+    .stars, .meteors {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .stars::before {
+      content: '';
+      background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/img/stars.png') repeat top center;
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes moveStars {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
+    }
+
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(to bottom, white, transparent);
+      animation: meteor-fall linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes meteor-fall {
+      0% {
+        transform: translateY(-100px) translateX(0) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .about-me {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 2rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    .about-me h2 {
+      font-size: 3rem;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      margin-bottom: 2rem;
+    }
+
+    .about-me-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .about-card {
+      background: rgba(0, 0, 50, 0.5);
+      border: 2px solid #00ffff;
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      min-width: 250px;
+      box-shadow: 0 0 15px #00ffff88;
+      transition: transform 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: scale(1.05);
+    }
+
+    .about-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #ff00cc;
+    }
+
+    .about-card p {
+      font-size: 1.2rem;
+      color: #ffffffcc;
+    }
+
+    /* Proyectos */
+    .projects {
+      padding: 4rem 2rem;
+      background: #111;
+      text-align: center;
+    }
+
+    .projects h2 {
+      font-size: 2.5em;
+      color: #00bcd4;
+      margin-bottom: 2rem;
+    }
+
+    .project-card {
+      background: #222;
+      border: 1px solid #00bcd4;
+      border-radius: 10px;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      max-width: 700px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card h3 {
+      color: #ff9800;
+      font-size: 1.8em;
+    }
+
+    .project-card p {
+      color: #ccc;
+      font-size: 1.1em;
+      margin: 0.5rem 0;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .project-link:hover {
+      background: #0097a7;
+    }
+
+    footer {
+      background: #263238;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 4rem;
+    }
+    .contact {
+  padding: 2rem;
+  text-align: center;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.contact-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.contact-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.contact-links img {
+  width: 24px;
+  height: 24px;
+}
+
+    @media (max-width: 768px) {
+      .about-me-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      .about-card {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5em;
+      }
+      .about-me h2, .projects h2 {
+        font-size: 2em;
+      }
+    }
+    @media (max-width: 320px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .about-me h2, .projects h2 {
+        font-size: 1.8em;
+      }
+    }
+    .contact-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px #00000080;
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background: #6366f1;
+      transform: scale(1.05);
+    }
+
+    .contact-button:focus {
+      outline: none;
+    }
+    .contact-button:active {
+      transform: scale(0.95);
+    }
+    .fun-facts {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px #00000030;
+    color: white;
+    }
+
+    .fun-facts h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #90cdf4;
+    }
+
+    .fun-facts ul {
+    list-style-type: "✨ ";
+    padding-left: 1.5rem;
+    }
+
+    .fun-facts li {
+    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
+    }
+    .fun-facts li strong {
+      color: #ffcc00;
+    }
+    .fun-facts li em {
+      color: #ff00cc;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Fondo animado -->
   <div class="stars"></div>
+  <div class="meteors" id="meteors"></div>
 
-  <div class="logo">
-    <span class="q">Q</span><span class="u">u</span><span class="i">i</span><span class="n">n</span><span class="t">t</span><span class="e">e</span><span class="r">r</span><span class="o">o</span>
-  </div>
+ 
+  <header>
+    <h1>Angel Quintero</h1> <br> <br>
+    <p id="presentacion" style="font-size: 1.2rem; margin-top: 10px; color: #ccc;"></p>
+    <button onclick="scrollToContact()" class="contact-button">
+      📡 Contacto
+    </button>
+    
+  </header>
 
-  <div class="search-container">
-    <input type="text" class="search-box" placeholder="Escribe cualquier cosa 👉👈😳" onkeypress="redirectToSearch(event)">
-    <button class="search-button" onclick="redirectToSearch(event)">Buscar</button>
-  </div>
+  
+  <section class="about-me">
+    <h2>🌠 Datos Galácticos Sobre Mí</h2>
+    <div class="about-me-info">
+      <div class="about-card"><h3>🪐 Nombre:</h3><p>Angel Manuel Quintero Durán</p></div>
+      <div class="about-card"><h3>🌌 Edad:</h3><p>19 años</p></div>
+      <div class="about-card"><h3>👾 Intereses:</h3><p>Programación, videojuegos, música, aprender cosas nuevas.</p></div>
+      <div class="about-card"><h3>🚀 Pasatiempos:</h3><p>Jugar, leer de tecnología, explorar herramientas de desarrollo.</p></div>
+      <div class="about-card"><h3>🌮 Comida favorita:</h3><p>Pizza 🍕</p></div>
+      <div class="about-card"><h3>🎨 Color favorito:</h3><p>Azul claro</p></div>
+    </div>
+  
+    <div class="fun-facts">
+      <h3>🧠 Curiosidades Cósmicas</h3>
+      <ul>
+        <li>¡Puedo escribir código mientras escucho música a todo volumen! 🎧</li>
+        <li>Mi primer programa fue un juego de consola en C#.</li>
+        <li>Me encanta resolver acertijos y problemas lógicos.</li>
+        <li>Mi cita favorita: "El éxito es la suma de pequeños esfuerzos repetidos día tras día."</li>
+        <li><strong>Lema de vida:</strong> "Nunca dejes de aprender, porque la vida nunca deja de enseñar."</li>
+      </ul>
+    </div>
+  </section>
+  
 
-  <div class="social-icons">
-    <a href="https://github.com" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-      GitHub
-    </a>
-    <a href="https://linkedin.com" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-      LinkedIn
-    </a>
-    <a href="https://mail.google.com" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
-      Gmail
-    </a>
-    <a href="https://wa.me" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
-      WhatsApp
-    </a>
-  </div>
+  <section class="projects">
+    <h2>🚧 Proyectos en Desarrollo</h2>
+  
+    <div class="project-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="Calculadora IMC" style="max-width: 100px; margin-bottom: 1rem;">
+      <h3>Calculadora de IMC UDI</h3>
+      <p>Calculadora web de Índice de Masa Corporal con estadísticas por programa académico.</p>
+      <a  target="_blank" href="https://calculadora-basica-imc.vercel.app/inicio" class="project-link">Ver Proyecto</a>
+        <a target="_blank"  href="https://github.com/nicoackerman/calculadora-basica-imc" class="project-link">Ver git hub del proyecto</a>
+    </div>
+  
+    <div class="project-card">
+      <img src="https://cdn-icons-png.flaticon.com/128/741/741407.png" alt="Simulación Meteoritos" style="max-width: 100px; margin-bottom: 1rem;">
+      <h3>Juego de Autos en Consola (C#)</h3>
+      <p>Juego de carreras para consola hecho en C# que permite competir hasta con 5 jugadores, eligiendo vehículos y pistas con potenciadores aleatorios.</p>
+      <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank" class="project-link">Ver git hub del proyecto</a>
+    </div>
+  </section>
+  <section class="contact">
+    <h2>📡 Contacto Interestelar</h2>
+    <div class="contact-links">
+      <a href="https://github.com/zabaladuran" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/angel-manuel-quintero-duran-a914a8330/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn
+      </a>
+      <a href="mailto:aquintero22@udi.edu.co">
+        <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email"> aquintero22@udi.edu.co
+      </a>
+    </div>
+  </section>
+
+ 
+  <footer>
+    <p>&copy; 2025 Angel Quintero 🚀 | Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Meteoritos
+    const meteorContainer = document.getElementById('meteors');
+    for (let i = 0; i < 20; i++) {
+      const meteor = document.createElement('div');
+      meteor.classList.add('meteor');
+      meteor.style.left = Math.random() * window.innerWidth + 'px';
+      meteor.style.animationDuration = (3 + Math.random() * 5) + 's';
+      meteor.style.animationDelay = Math.random() * 10 + 's';
+      meteorContainer.appendChild(meteor);
+    }
+  
+    // Presentación animada
+    anime({
+      targets: '#presentacion',
+      opacity: [0, 1],
+      translateY: [20, 0],
+      delay: 500,
+      duration: 1500,
+      easing: 'easeOutExpo',
+      complete: () => {
+        document.getElementById("presentacion").innerHTML =
+          `Hola, soy <strong>Angel Manuel Quintero Durán</strong><br>
+          Programador con experiencia en <strong>frontend</strong> y <strong>backend</strong>, con gran capacidad de aprendizaje y lógica computacional. Me gusta construir cosas que funcionen bien y se vean mejor.`;
+      }
+    });
+  
+    // Animación de tarjetas
+    anime({
+      targets: '.about-card',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200),
+      duration: 1000,
+      easing: 'easeOutExpo'
+    });
+    function scrollToContact() {
+      document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
