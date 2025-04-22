@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <!-- Estilos -->
   <style>
@@ -124,11 +125,12 @@
       padding: 1rem 2rem;
       min-width: 250px;
       box-shadow: 0 0 15px #00ffff88;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .about-card:hover {
-      transform: scale(1.05);
+      transform: perspective(200px) rotate(10deg) translateY(-10px) scale(1.1);
+      box-shadow: 0 0 25px #00ffffcc;
     }
 
     .about-card h3 {
@@ -337,6 +339,7 @@
     </button>
     
   </header>
+  
 
   
   <section class="about-me">
@@ -381,6 +384,25 @@
       <a href="https://github.com/zabaladuran/juego_carreras_c-" target="_blank" class="project-link">Ver git hub del proyecto</a>
     </div>
   </section>
+
+  <section id="snake-game" style="text-align: center; margin-top: 50px;">
+    <h2>🐍 Juego de la Culebrita</h2>
+    <canvas id="snakeCanvas" width="400" height="400" style="border: 1px solid #fff;"></canvas>
+    <div style="margin-top: 20px;">
+      <button id="startGame" style="padding: 10px 20px; font-size: 1rem; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Comenzar</button>
+      <button id="stopGame" style="padding: 10px 20px; font-size: 1rem; background: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;" disabled>Finalizar</button>
+    </div>
+    <!-- Controles táctiles en forma de cruz -->
+    <div id="mobileControls" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <button class="control-button" data-direction="UP" style="padding: 10px; font-size: 1rem; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer;">⬆️</button>
+      <div style="display: flex; gap: 5px;">
+        <button class="control-button" data-direction="LEFT" style="padding: 10px; font-size: 1rem; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer;">⬅️</button>
+        <button class="control-button" data-direction="RIGHT" style="padding: 10px; font-size: 1rem; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer;">➡️</button>
+      </div>
+      <button class="control-button" data-direction="DOWN" style="padding: 10px; font-size: 1rem; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer;">⬇️</button>
+    </div>
+  </section>
+
   <section class="contact">
     <h2>📡 Contacto Interestelar</h2>
     <div class="contact-links">
@@ -396,10 +418,7 @@
     </div>
   </section>
 
- 
-  <footer>
-    <p>&copy; 2025 Angel Quintero 🚀 | Todos los derechos reservados.</p>
-  </footer>
+  <script src="cuborubik.js"></script>
 
   <script>
     // Meteoritos
@@ -440,6 +459,144 @@
     function scrollToContact() {
       document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' });
     }
+
+    // Juego de la Culebrita
+    const canvas = document.getElementById("snakeCanvas");
+    const ctx = canvas.getContext("2d");
+    const startButton = document.getElementById("startGame");
+    const stopButton = document.getElementById("stopGame");
+
+    const box = 20; // Tamaño de cada cuadro
+    let snake = [{ x: 9 * box, y: 10 * box }]; // Posición inicial de la serpiente
+    let direction = "RIGHT"; // Dirección inicial
+    let food = {
+      x: Math.floor(Math.random() * 20) * box,
+      y: Math.floor(Math.random() * 20) * box,
+    };
+    let score = 0;
+    let game; // Variable para el intervalo del juego
+    let isGameRunning = false;
+
+    // Control de dirección
+    document.addEventListener("keydown", (event) => {
+      if (!isGameRunning) return; // Ignorar controles si el juego no está corriendo
+      if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+      else if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+      else if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+      else if (event.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+    });
+
+    // Control de dirección con botones táctiles
+    mobileControls.addEventListener("click", (event) => {
+    if (!isGameRunning) return; // Ignorar controles si el juego no está corriendo
+    const button = event.target.closest(".control-button");
+    if (!button) return;
+
+    const newDirection = button.getAttribute("data-direction");
+    if (
+      (newDirection === "UP" && direction !== "DOWN") ||
+      (newDirection === "DOWN" && direction !== "UP") ||
+      (newDirection === "LEFT" && direction !== "RIGHT") ||
+      (newDirection === "RIGHT" && direction !== "LEFT")
+    ) {
+      direction = newDirection;
+    }
+  });
+
+
+    // Dibuja la serpiente
+    function drawSnake() {
+      snake.forEach((segment, index) => {
+        ctx.fillStyle = index === 0 ? "#00ff00" : "#ffffff";
+        ctx.fillRect(segment.x, segment.y, box, box);
+        ctx.strokeStyle = "#000";
+        ctx.strokeRect(segment.x, segment.y, box, box);
+      });
+    }
+
+    // Dibuja la comida
+    function drawFood() {
+      ctx.fillStyle = "#ff0000";
+      ctx.fillRect(food.x, food.y, box, box);
+    }
+
+    // Actualiza el juego
+    function updateGame() {
+      const head = { ...snake[0] };
+
+      if (direction === "UP") head.y -= box;
+      else if (direction === "DOWN") head.y += box;
+      else if (direction === "LEFT") head.x -= box;
+      else if (direction === "RIGHT") head.x += box;
+
+      // Verifica si la serpiente come la comida
+      if (head.x === food.x && head.y === food.y) {
+        score++;
+        food = {
+          x: Math.floor(Math.random() * 20) * box,
+          y: Math.floor(Math.random() * 20) * box,
+        };
+      } else {
+        snake.pop(); // Elimina la cola si no come
+      }
+
+      // Agrega la nueva cabeza
+      snake.unshift(head);
+
+      // Verifica colisiones
+      if (
+        head.x < 0 ||
+        head.x >= canvas.width ||
+        head.y < 0 ||
+        head.y >= canvas.height ||
+        snake.slice(1).some((segment) => segment.x === head.x && segment.y === head.y)
+      ) {
+        stopGame();
+        alert(`Game Over! Puntuación: ${score}`);
+      }
+    }
+
+    // Dibuja el juego
+    function drawGame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawFood();
+      drawSnake();
+      updateGame();
+    }
+
+    // Inicia el juego
+    function startGame() {
+      if (isGameRunning) return;
+      isGameRunning = true;
+      score = 0;
+      snake = [{ x: 9 * box, y: 10 * box }];
+      direction = "RIGHT";
+      food = {
+        x: Math.floor(Math.random() * 20) * box,
+        y: Math.floor(Math.random() * 20) * box,
+      };
+      game = setInterval(drawGame, 100);
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      document.body.style.overflow = "hidden"; // Evita el desplazamiento de la página
+    }
+
+    // Detiene el juego
+    function stopGame() {
+      clearInterval(game);
+      isGameRunning = false;
+      startButton.disabled = false;
+      stopButton.disabled = true;
+      document.body.style.overflow = "auto"; // Permite el desplazamiento de la página
+    }
+
+    // Eventos de los botones
+    startButton.addEventListener("click", startGame);
+    stopButton.addEventListener("click", stopGame);
   </script>
+
+  <footer>
+    <p>&copy; 2025 Angel Quintero 🚀 | Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>
